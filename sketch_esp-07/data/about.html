@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
+  <title>Evil Corp - About Page</title>
+  <style>
+  
+		/* Basic styling for html and body */
+        html,
+        body {
+			height: 100%;                          /* Ensures the body takes full height of the viewport */
+			margin: 0;                             /* Removes default margin around the page */
+			padding: 0;                            /* Removes default padding */
+			font-family: "Inter", sans-serif;      /* Sets a modern sans-serif font for the body */
+			background-color: #efefef;             /* Sets a light gray background color for the page */
+		}
+
+
+
+        /* Flexbox layout to ensure footer stays at the bottom of the page */
+        body {
+			display: flex;                         /* Uses flexbox layout for the page */
+			flex-direction: column;                /* Stacks elements vertically */
+			min-height: 100vh;                     /* Ensures the body takes at least the full height of the viewport */
+		}
+
+
+
+        main {
+			flex: 1;                               /* Makes the main section occupy the available space between header and footer */
+			padding: 20px;                         /* Adds padding inside the main content */
+			background-color: #f0f0f0;             /* Light gray background color for the main content */
+		}
+
+
+
+        /***********************       Footer Styling        ***********************/
+        
+        /***************************************************************************/
+       
+		/* Footer styling for bottom of the page */
+        footer {
+			text-align: center;                    /* Centers the content inside the footer */
+			padding: 10px;                         /* Adds padding around the footer content */
+			background-color: #333;                /* Dark background for the footer */
+			color: white;                          /* Sets the text color to white */
+			margin-top: auto;                      /* Pushes the footer to the bottom if there's extra space */
+			font-size: 18px; 					   /* Text size in px */
+		}
+
+
+
+
+
+
+        /***********************        Navbar styling       ***********************/
+        
+        /***************************************************************************/
+        .navbar {
+			background-color: #444444;             /* Dark background color for the navbar */
+			padding: 10px;                         /* Adds padding around navbar */
+			text-align: center;                    /* Centers navbar content */
+		}
+
+
+
+        /* Styling for links in the navbar */
+        .navbar a {
+			color: white;                           /* Sets link text color to white */
+			padding: 10px;                          /* Adds padding inside the links */
+			text-decoration: none;                  /* Removes underline from the links */
+			margin: 0 10px;                         /* Adds horizontal spacing between links */
+			font-family: "Lato", sans-serif;        /* Sets a clean sans-serif font for the links */
+			font-size: 18px;                        /* Makes the font size larger for readability */
+			text-transform: uppercase;              /* Makes the link text uppercase */
+			cursor: pointer;                        /* Changes cursor to pointer on hover */
+			transition: color 0.5s;                 /* Smooth color transition on hover */
+			position: relative;                     /* Needed for pseudo-element positioning */
+		}
+
+
+
+
+        /* Hover effects for navbar links */
+        .navbar a:hover {
+			background-color: #555555; 				/* Lighter background on hover */
+			color: #95a5a6; 						/* Changes text color on hover */
+        }
+
+
+		/* Adds an underline effect on navbar links on hover */
+        .navbar a::after {
+			content: "";                            /* Creates a pseudo-element */
+			position: absolute;                     /* Positions the pseudo-element */
+			width: 100%;                            /* Full width for the underline */
+			height: 2px;                            /* Height of the underline */
+			top: 100%;                              /* Places it below the link */
+			left: 0;
+			background: #ff7000;                    /* Orange color for the underline */
+			transition: transform 0.5s;              /* Smooth animation */
+			transform: scaleX(0);                   /* Starts as invisible */
+			transform-origin: right;                /* Animation grows from the right side */
+		}
+
+
+        .navbar a:hover::after {
+			transform: scaleX(1);                   /* Expands the underline on hover */
+			transform-origin: left;                 /* Animation grows to the left */
+        }
+
+
+		/* Navbar list styling */
+        .navbar ul {
+			display: flex;                          /* Uses flexbox to layout the items */
+			gap: 2rem;                            /* Adds horizontal space between items */
+			list-style-type: none;                  /* Removes default list styling */
+			margin: 0;                              /* Removes default margin */
+			padding: 0;                             /* Removes default padding */
+			width: 100%;                            /* Makes the list take the full width */
+			justify-content: space-between;         /* Distributes items between left and right */
+		}	
+
+
+		/* Aligns logout button to the far right */
+        .navbar>ul>li:last-child {
+            margin-left: auto;						/* This pushes the logout button to the far right */
+        }
+        
+        
+
+
+        /*******************    Container styling for content    *******************/
+        
+        /***************************************************************************/
+        .container {
+			width: 80%; 									/* Container width set to 80% of the screen */
+			margin: 20px auto; 								/* Centers the container horizontally with margin on top and bottom */
+			background-color: white; 						/* White background for the container */
+			padding: 20px; 									/* Padding inside the container for spacing */
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 	/* Light shadow for depth effect */
+		}
+
+
+
+        /* Category section styling */
+        .category {
+			font-family: "Verdana", "Arial", sans-serif;
+			font-weight: bold;                      		/* Makes category text bold */
+			font-size: 32px;                        		/* Large font size for categories */
+			line-height: 50px;                      		/* Spacing between lines */
+			padding: 20px 10px 0px 10px;            		/* Adds padding around the category section */
+			color: #000000;                         		/* Sets text color to black */
+			margin: 0 auto;                         		/* Centers the category section */
+		}
+		
+		
+
+        /***********************      Body Text Styling      ***********************/
+        
+        /***************************************************************************/
+        .bodytext {
+			font-family: "Verdana", "Arial", sans-serif;  	/* Sets font family for body text */
+			font-size: 18px;                         		/* Font size for readability */
+			text-align: left;                        		/* Aligns text to the left */
+        }
+        
+
+	  	/* Styling for the header (e.g., h1 title) */
+		/* Centers the text and adjusts spacing for better readability */
+	  	h1 {
+			text-align: center;                 	/* Centers the title */
+			font-size: 24px;                    	/* Sets a readable font size */
+			margin-top: 50px;                   	/* Adds space above the title */
+	  	}
+
+
+	  	/* About content section styling */
+		/* Centers the text and uses smaller font for descriptions */
+	  	.about-content {
+			margin-top: 18px;
+			font-size: 14px;
+			text-align: center;
+			color: #333;
+	  	}
+	  	
+	  	
+	  	
+		/* Adds spacing between paragraphs in the about section */
+	  	.about-content p {
+			margin: 10px 0;							/* Vertical spacing between paragraphs */
+	  	}
+
+
+
+		/* Styling for links in the about section */
+		/* Uses a blue color for links with a hover underline effect */
+		.about-content a {
+			color: #007bff;                     /* Blue link color */
+			text-decoration: none;              /* Removes underline by default */
+	  	}
+
+
+
+
+	  	/* Link hover effect */
+	  	.about-content a:hover {
+			text-decoration: underline;				/* Adds underline on hover */
+	  	}
+
+
+
+        /***************   Responsive Design with Media Queries   ******************/
+        						/* For Mobile Devices */
+        /***************************************************************************/
+        
+		@media only screen and (max-width: 480px) {
+
+			/* Ensure the page has a maximum height equal to the viewport height */
+			html, body {
+				height: 100%;           /* Ensure the body takes up the full height of the window */
+				max-height: 100vh;      /* Set the maximum height to the viewport height */
+				margin: 0;              /* Remove default margin */
+				padding: 0;             /* Remove default padding */
+				overflow: hidden;       /* Prevent the page from exceeding the vertical space */
+			}
+
+			/* Restrict the height for the body content and footer */
+			body {
+				display: flex;          /* Use flexbox to manage layout */
+				flex-direction: column; /* Arrange children in a vertical direction */
+				max-height: 480px;      /* Set the maximum height to 480px for smaller screens */
+			}
+
+			/* Allow the main content to grow and scroll if necessary */
+			main {
+				flex-grow: 1;           /* The content will expand to take the remaining space */
+				overflow-y: auto;       /* Enable vertical scrolling if content overflows */
+			}
+
+			/* Apply text overflow and hide any excess content in the footer */
+			footer {
+				overflow: hidden;       /* Hide overflow content */
+				text-overflow: ellipsis;/* Add ellipsis for overflowed text */
+				white-space: nowrap;    /* Prevent text from wrapping */
+			}
+
+			/* Hide the stacked text content on small screens */
+			.container .stack {
+				display: none;          /* Hide the stacked text effect */
+			}
+
+			/* Adjust navbar to be left-aligned on small screens */
+			.navbar {
+				text-align: left;       /* Align navbar links to the left */
+			}
+
+			/* Adjust navbar link padding and font size */
+			.navbar a {
+				padding: 8px;           /* Reduce padding for smaller screens */
+				font-size: 14px;        /* Set a smaller font size for mobile devices */
+			}
+
+			/* Adjust the font size for body text */
+			.bodytext {
+				font-size: 14px;        /* Set font size for body text */
+			}
+
+			/* Adjust button padding and font size */
+			.btn {
+				padding: 5px 10px;      /* Set padding for buttons */
+				font-size: 12px;        /* Set smaller font size for buttons */
+			}
+
+
+			/* Adjust the font size for category headings */
+			.category {
+				font-size: 24px;        /* Set font size for categories */
+			}
+			
+		}
+
+
+
+        /***************   Responsive Design with Media Queries   ******************/
+        				/* For Tablets (Landscape and Portrait) */
+        /***************************************************************************/
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;					/* Slightly less width on tablets */
+                padding: 15px;				/* Adjusted padding for tablets */
+            }
+
+            .navbar {
+                text-align: center;			/* Center navbar on tablets */
+            }
+        }
+
+
+
+
+        /*******************   For Desktops and Larger Screens   *******************/
+        
+        /***************************************************************************/
+        @media (min-width: 1024px) {
+            .container {
+                width: 80%;					/* Default width for desktop */
+                padding: 20px;				/* Padding for desktop */
+            }
+
+            .navbar {
+                text-align: center;			/* Center navbar on larger screens */
+            }
+        }
+	  
+	  		
+	  		
+	  		
+  		/***********************    Logout button styling    ***********************/
+		      /* Creates a visually distinct button with hover effects */
+		/***************************************************************************/
+  		.logout-btn {
+			background-color: #808080;          			/* Neutral gray background */
+			color: white;                       			/* White text for contrast */
+			padding: 10px 20px;                 			/* Inner spacing for the button */
+			text-decoration: none;              			/* Removes underline */
+			border-radius: 5px;                 			/* Smooth rounded corners */
+			transition: background-color 0.3s ease; 		/* Smooth transition on hover */
+		}
+
+
+
+		/* Changes the button's background color on hover for interactivity */
+		.logout-btn:hover {
+			background-color: #555555;  					/* Darker gray background on hover */
+		}
+
+</style>
+
+</head>
+<body id="main-body" onload="process()">
+
+    <!-- Navigation bar section -->
+	<div class="navbar">
+		<ul style="display: flex; gap: 2.5rem; list-style-type: none; margin: 0; padding: 0;">
+		
+		    <!-- Link to the Home page -->
+		    <li><a href="#" id="homeLink">Home</a></li>
+		    
+		    <!-- Link to the Access Point (AP) Settings -->
+		    <li><a href="#" id="wifi_settings">AP_Settings</a></li>
+		    
+		    <!-- Link to the About page -->
+		    <li><a href="#" id="aboutLink">About</a></li>
+		    
+		    <!-- Logout button for user -->
+		    <li><a href="#" id="logoutLink" class="logout-btn">Logout</a></li>
+		</ul>
+	</div>
+
+
+
+
+  <!-- Main content for the about page -->
+  <h1>About</h1>
+  <div class="about-content">
+    <p>This is a Proof of Concept (POC) project.</p>
+    <p>I do not take responsibility for any misuse of this project.</p>
+    &nbsp;
+    <p><strong>Author:</strong> <span>Im0nk3yar0und</span></p>
+    &nbsp;
+    <p>Follow me on <a href="https://medium.com/@im0nk3yar0und" target="_blank">Medium</a></p>
+    <p>Check out my <a href="https://github.com/Im0nk3yar0und" target="_blank">GitHub</a> for more projects.</p>
+  </div>
+
+</body>
+
+<!-- Footer section -->
+<footer class="footer" id="temp">Evil USB - Demo</footer>
+
+
+
+<script>
+	  // Event listener for the About link to navigate to the About page
+	  document.getElementById('aboutLink').addEventListener('click', function() {
+	  
+	  	// This will open the about.html page
+		window.location.href = "/about";
+	  });
+
+
+
+	  // Event listener for the Home link to navigate to the Home page
+	  document.getElementById('homeLink').addEventListener('click', function() {
+	  
+	  	// This will open the home.html page
+		window.location.href = "/home";
+	  });
+	  
+	  
+	  
+	  // Event listener for the Logout link to trigger logout
+	  document.getElementById('logoutLink').addEventListener('click', function() {
+	  
+	  	// This will logout
+		window.location.href = "/logout";
+	  });
+	  
+	  
+	  
+
+	  // Event listener for the AP Settings link to navigate to AP settings page
+	  document.getElementById('wifi_settings').addEventListener('click', function() {
+	  
+	  	// This will open the wifi_settings.html page
+		window.location.href = "/wifi_settings"; 
+	  });
+</script>
+
+</html>

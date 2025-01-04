@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
+    <title>Evil Corp - Wi-Fi AP Settings</title>
+    
+    <style>
+		/* Ensure the body and html take up the full height of the viewport */
+        html,
+        body {
+			height: 100%;                          /* Ensures the body takes full height of the viewport */
+			margin: 0;                             /* Removes default margin around the page */
+			padding: 0;                            /* Removes default padding */
+			font-family: "Inter", sans-serif;      /* Sets a modern sans-serif font for the body */
+			background-color: #efefef;             /* Sets a light gray background color for the page */
+		}
+
+
+
+        /* Flexbox layout to ensure footer stays at the bottom of the page */
+        body {
+			display: flex;                         /* Uses flexbox layout for the page */
+			flex-direction: column;                /* Stacks elements vertically */
+			min-height: 100vh;                     /* Ensures the body takes at least the full height of the viewport */
+		}
+
+
+
+        main {
+			flex: 1;                               /* Makes the main section occupy the available space between header and footer */
+			padding: 20px;                         /* Adds padding inside the main content */
+			background-color: #f0f0f0;             /* Light gray background color for the main content */
+		}
+
+
+
+        /***********************       Footer Styling        ***********************/
+        
+        /***************************************************************************/
+       
+		/* Footer styling for bottom of the page */
+        footer {
+			text-align: center;                    /* Centers the content inside the footer */
+			padding: 10px;                         /* Adds padding around the footer content */
+			background-color: #333;                /* Dark background for the footer */
+			color: white;                          /* Sets the text color to white */
+			margin-top: auto;                      /* Pushes the footer to the bottom if there's extra space */
+			font-size: 18px; 					   /* Text size in px */
+		}
+
+
+
+
+
+
+        /***********************        Navbar styling       ***********************/
+        
+        /***************************************************************************/
+        .navbar {
+			background-color: #444444;             /* Dark background color for the navbar */
+			padding: 10px;                         /* Adds padding around navbar */
+			text-align: center;                    /* Centers navbar content */
+		}
+
+
+
+        /* Styling for links in the navbar */
+        .navbar a {
+			color: white;                           /* Sets link text color to white */
+			padding: 10px;                          /* Adds padding inside the links */
+			text-decoration: none;                  /* Removes underline from the links */
+			margin: 0 10px;                         /* Adds horizontal spacing between links */
+			font-family: "Lato", sans-serif;        /* Sets a clean sans-serif font for the links */
+			font-size: 18px;                        /* Makes the font size larger for readability */
+			text-transform: uppercase;              /* Makes the link text uppercase */
+			cursor: pointer;                        /* Changes cursor to pointer on hover */
+			transition: color 0.5s;                 /* Smooth color transition on hover */
+			position: relative;                     /* Needed for pseudo-element positioning */
+		}
+
+
+
+
+        /* Hover effects for navbar links */
+        .navbar a:hover {
+			background-color: #555555; 				/* Lighter background on hover */
+			color: #95a5a6; 						/* Changes text color on hover */
+        }
+
+
+		/* Adds an underline effect on navbar links on hover */
+        .navbar a::after {
+			content: "";                            /* Creates a pseudo-element */
+			position: absolute;                     /* Positions the pseudo-element */
+			width: 100%;                            /* Full width for the underline */
+			height: 2px;                            /* Height of the underline */
+			top: 100%;                              /* Places it below the link */
+			left: 0;
+			background: #ff7000;                    /* Orange color for the underline */
+			transition: transform 0.5s;              /* Smooth animation */
+			transform: scaleX(0);                   /* Starts as invisible */
+			transform-origin: right;                /* Animation grows from the right side */
+		}
+
+
+        .navbar a:hover::after {
+			transform: scaleX(1);                   /* Expands the underline on hover */
+			transform-origin: left;                 /* Animation grows to the left */
+        }
+
+
+		/* Navbar list styling */
+        .navbar ul {
+			display: flex;                          /* Uses flexbox to layout the items */
+			gap: 2rem;                            /* Adds horizontal space between items */
+			list-style-type: none;                  /* Removes default list styling */
+			margin: 0;                              /* Removes default margin */
+			padding: 0;                             /* Removes default padding */
+			width: 100%;                            /* Makes the list take the full width */
+			justify-content: space-between;         /* Distributes items between left and right */
+		}	
+
+
+		/* Aligns logout button to the far right */
+        .navbar>ul>li:last-child {
+            margin-left: auto;						/* This pushes the logout button to the far right */
+        }
+        
+        
+        
+        
+
+        /*******************    Container styling for content    *******************/
+        
+        /***************************************************************************/
+        .container {
+			width: 80%; 									/* Container width set to 80% of the screen */
+			margin: 20px auto; 								/* Centers the container horizontally with margin on top and bottom */
+			background-color: white; 						/* White background for the container */
+			padding: 20px; 									/* Padding inside the container for spacing */
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 	/* Light shadow for depth effect */
+		}
+
+
+
+        /* Category section styling */
+        .category {
+			font-family: "Verdana", "Arial", sans-serif;
+			font-weight: bold;                      		/* Makes category text bold */
+			font-size: 32px;                        		/* Large font size for categories */
+			line-height: 50px;                      		/* Spacing between lines */
+			padding: 20px 10px 0px 10px;            		/* Adds padding around the category section */
+			color: #000000;                         		/* Sets text color to black */
+			margin: 0 auto;                         		/* Centers the category section */
+		}
+
+
+
+
+
+        /***********************      Body Text Styling      ***********************/
+        
+        /***************************************************************************/
+        .bodytext {
+			font-family: "Verdana", "Arial", sans-serif;  	/* Sets font family for body text */
+			font-size: 18px;                         		/* Font size for readability */
+			text-align: left;                        		/* Aligns text to the left */
+        }
+
+
+
+
+
+
+
+
+        /***********************        Button styling       ***********************/
+        
+        /***************************************************************************/
+        .btn {
+			background-color: #444444;              /* Dark background for the button */
+			border: none;                           /* Removes default border */
+			color: white;                           /* Sets button text color to white */
+			padding: 10px 20px;                     /* Adds padding inside the button */
+			font-size: 16px;                        /* Font size for button text */
+			cursor: pointer;                        /* Changes cursor to pointer on hover */
+		}
+
+
+
+        .btn:hover {
+            background-color: #555555;				/* Lighter background on hover */
+        }
+
+
+
+
+
+		/* Center align the heading */
+		h2 {
+		    text-align: center;							/* Centers the heading text */
+		}
+
+
+
+		/* Form group styling */
+		.form-group text,
+		password {
+		    margin-bottom: 20px;						/* Adds spacing below each form group */
+		}
+
+		/* Ensure label is on a new line */
+		label {
+		    display: block;							/* Forces the label to be on its own line */
+		    margin-bottom: 5px;						/* Adds space between the label and input */
+		    font-weight: bold;						/* Optional: makes the label text bold */
+		}
+
+		/* Input field styling for text and password */
+		input[type="text"],
+		input[type="password"] {
+		    width: 90%;								/* Input fields take the full width of the container */
+		    padding: 10px;							/* Adds padding inside the input fields */
+		    margin: 5px 0;							/* Adds margin above and below each input field */
+		    border: 1px solid #ddd;					/* Light border around the input fields */
+		    border-radius: 4px;						/* Rounded corners for input fields */
+		}
+
+		/* Styling for checkbox in the form */
+		.form-group checkbox {
+		    margin-bottom: 20px;					/* Space between form fields */
+		}
+
+		/* Ensure label and checkbox are on the same line */
+		.checkbox-group label {
+		    display: inline-block;					/* Makes labels appear inline */
+		    margin-right: 10px;						/* Adds space between the label and checkbox */
+		    font-weight: normal;					/* Optional: Adjust font weight for clarity */
+		}
+
+		/* Style the checkbox */
+		input[type="checkbox"] {
+		    vertical-align: middle;					/* Align the checkbox in the middle with the text */
+		}
+
+		/* Button styling */
+		.form-group button {
+		    background-color: #4CAF50;				/* Green background for the button */
+		    color: white;							/* White text on the button */
+		    padding: 10px 20px;						/* Padding inside the button */
+		    border: none;							/* No border for the button */
+		    border-radius: 4px;						/* Rounded corners for the button */
+		    cursor: pointer;						/* Change cursor to pointer when hovering over the button */
+		    width: 100%;							/* Button takes the full width of the form */
+		    font-size: 16px;						/* Sets the font size of the button text */
+		}
+
+		/* Button hover effect */
+		.form-group button:hover {
+		    background-color: #45a049;				/* Darker green when hovering over the button */
+		}
+
+
+
+
+        /***************************        Glitch       ***************************/
+        						/*Box-sizing for all elements */
+        /***************************************************************************/
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+        }
+
+        .stack {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .stack span {
+            font-weight: bold;
+            grid-row-start: 1;
+            grid-column-start: 1;
+            font-size: 2rem;
+            --stack-height: calc(100% / var(--stacks) - 1px);
+            --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+            --clip-top: calc(var(--stack-height) * var(--index));
+            --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+            clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+            animation: stack 340ms cubic-bezier(.46, .29, 0, 1.24) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+        }
+
+        .stack span:nth-child(odd) {
+            --glitch-translate: 8px;
+        }
+
+        .stack span:nth-child(even) {
+            --glitch-translate: -8px;
+        }
+
+        @keyframes stack {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%);
+                text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+            }
+
+            ;
+
+            60% {
+                opacity: 0.5;
+                transform: translateX(50%);
+            }
+
+            80% {
+                transform: none;
+                opacity: 1;
+                text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+            }
+
+            100% {
+                text-shadow: none;
+            }
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+                transform: translate(var(--glitch-translate));
+            }
+
+            2% {
+                text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+            }
+
+            4%,
+            100% {
+                text-shadow: none;
+                transform: none;
+            }
+        }
+
+
+
+        /***************   Responsive Design with Media Queries   ******************/
+        						/* For Mobile Devices */
+        /***************************************************************************/
+        
+		@media (max-width: 480px) {
+
+
+			/* Ensure the page has a maximum height equal to the viewport height */
+			html, body {
+				height: 100%;           /* Ensure the body takes up the full height of the window */
+				max-height: 100vh;      /* Set the maximum height to the viewport height */
+				margin: 0;              /* Remove default margin */
+				padding: 0;             /* Remove default padding */
+				overflow: hidden;       /* Prevent the page from exceeding the vertical space */
+			}
+
+			/* Restrict the height for the body content and footer */
+			body {
+				display: flex;          /* Use flexbox to manage layout */
+				flex-direction: column; /* Arrange children in a vertical direction */
+				max-height: 480px;      /* Set the maximum height to 480px for smaller screens */
+			}
+
+			/* Allow the main content to grow and scroll if necessary */
+			main {
+				flex-grow: 1;           /* The content will expand to take the remaining space */
+				overflow-y: auto;       /* Enable vertical scrolling if content overflows */
+			}
+
+			/* Apply text overflow and hide any excess content in the footer */
+			footer {
+				overflow: hidden;       /* Hide overflow content */
+				text-overflow: ellipsis;/* Add ellipsis for overflowed text */
+				white-space: nowrap;    /* Prevent text from wrapping */
+			}
+
+
+
+			/* Adjust navbar to be left-aligned on small screens */
+			.navbar {
+				text-align: left;       /* Align navbar links to the left */
+			}
+
+			/* Adjust navbar link padding and font size */
+			.navbar a {
+				padding: 8px;           /* Reduce padding for smaller screens */
+				font-size: 14px;        /* Set a smaller font size for mobile devices */
+			}
+
+			/* Adjust the font size for body text */
+			.bodytext {
+				font-size: 14px;        /* Set font size for body text */
+			}
+
+			/* Adjust the font size for category headings */
+			.category {
+				font-size: 24px;        /* Set font size for categories */
+			}
+		}
+		
+		
+        /***************   Responsive Design with Media Queries   ******************/
+        				/* For Tablets (Landscape and Portrait) */
+        /***************************************************************************/
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;					/* Slightly less width on tablets */
+                padding: 15px;				/* Adjusted padding for tablets */
+            }
+
+            .navbar {
+                text-align: center;			/* Center navbar on tablets */
+            }
+        }
+
+
+
+
+        /*******************   For Desktops and Larger Screens   *******************/
+        
+        /***************************************************************************/
+        @media (min-width: 1024px) {
+            .container {
+                width: 80%;					/* Default width for desktop */
+                padding: 20px;				/* Padding for desktop */
+            }
+
+            .navbar {
+                text-align: center;			/* Center navbar on larger screens */
+            }
+        }
+
+
+  		/***********************    Logout button styling    ***********************/
+		      /* Creates a visually distinct button with hover effects */
+		/***************************************************************************/
+  		.logout-btn {
+			background-color: #808080;          			/* Neutral gray background */
+			color: white;                       			/* White text for contrast */
+			padding: 10px 20px;                 			/* Inner spacing for the button */
+			text-decoration: none;              			/* Removes underline */
+			border-radius: 5px;                 			/* Smooth rounded corners */
+			transition: background-color 0.3s ease; 		/* Smooth transition on hover */
+		}
+
+
+
+		/* Changes the button's background color on hover for interactivity */
+		.logout-btn:hover {
+			background-color: #555555;  					/* Darker gray background on hover */
+		}
+
+
+</style>
+    
+    
+    
+</head>
+<body id="main-body" onload="process()">
+
+    <!-- Navigation bar section -->
+	<div class="navbar">
+		<ul style="display: flex; gap: 2.5rem; list-style-type: none; margin: 0; padding: 0;">
+		
+		    <!-- Link to the Home page -->
+		    <li><a href="#" id="homeLink">Home</a></li>
+		    
+		    <!-- Link to the Access Point (AP) Settings -->
+		    <li><a href="#" id="wifi_settings">AP_Settings</a></li>
+		    
+		    <!-- Link to the About page -->
+		    <li><a href="#" id="aboutLink">About</a></li>
+		    
+		    <!-- Logout button for user -->
+		    <li><a href="#" id="logoutLink" class="logout-btn">Logout</a></li>
+		</ul>
+	</div>
+
+
+    <!-- Section displaying a stacked "Evil Corp" text effect -->
+    <div class="container">
+		  <div class="stack" style="--stacks: 3;">
+		  
+		  
+			<!-- Repeated text for visual stacking effect -->
+			<span style="--index: 0;">Evil Corp</span>
+			<span style="--index: 1;">Evil Corp</span>
+			<span style="--index: 2;">Evil Corp</span>
+		  </div>
+	</div>
+
+
+    <div class="container">
+        <div class="text"></div>
+    </div>
+
+
+    <!-- Wi-Fi Settings Form -->
+    <div class="container">
+        <h2>Wi-Fi AP Settings</h2>
+        <form id="wifiForm">
+            <!-- SSID Field -->
+            <div class="form-group">
+                <label for="ssid">SSID:</label>
+                <input type="text" id="ssid" name="ssid" placeholder="Enter SSID" required>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+
+			&nbsp;
+			&nbsp;
+			
+			
+            <!-- SSID Hide Field -->
+            <div class="form-group">
+                <label for="ssidHide">Hide SSID:</label>
+                <input type="checkbox" id="ssidHide" name="ssidHide">
+            </div>
+            
+            &nbsp;
+			&nbsp;
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="button" onclick="saveSettings()">Save Settings</button>
+            </div>
+        </form>
+    </div>
+
+
+
+<footer class="footer" id="temp">Evil USB - Demo</footer>
+
+
+
+
+
+<script>
+/**
+ * JavaScript to handle navigation for the navbar links.
+ * This script listens for click events on the navbar links and redirects the user to the corresponding pages.
+ */
+	document.getElementById('aboutLink').addEventListener('click', function() {
+
+		// Navigate to About page
+		window.location.href = "/about"; 
+	});
+
+
+
+	document.getElementById('homeLink').addEventListener('click', function() {
+
+		// Navigate to Home page
+		window.location.href = "/home";
+	});
+
+
+
+	document.getElementById('logoutLink').addEventListener('click', function() {
+
+		// This will logout
+		window.location.href = "/logout";
+	});
+
+
+
+	document.getElementById('wifi_settings').addEventListener('click', function() {
+
+		// Stay on current page (Wi-Fi settings)
+		window.location.href = "/wifi_settings";
+	});
+
+
+
+/**
+ * This JavaScript function, saveSettings, handles the submission of Wi-Fi configuration settings. 
+ * 
+ * It retrieves user input values for the SSID, password, and whether the SSID should be hidden, 
+ * then sends this data as a JSON object via a POST request to the /save_wifi_settings endpoint. 
+ * 
+ * The server's response is processed to display a success message or an error, and any unexpected errors are logged to the console.
+*/
+
+	function saveSettings() {
+		const ssid = document.getElementById('ssid').value;
+		const password = document.getElementById('password').value;
+		const ssidHide = document.getElementById('ssidHide').checked;
+
+		// Make an API call to save settings
+		fetch('/save_wifi_settings', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify({
+		            ssid: ssid,
+		            password: password,
+		            ssidHide: ssidHide
+		        })
+		    })
+		    
+		    
+		    // Parse the JSON response
+		    .then(response => response.json())
+		    .then(data => {
+		        if (data.success) {
+		        
+		            // Success response
+		            alert("Settings saved successfully!");
+		            
+		        } else {
+		        
+		            // Display server error message
+		            alert(`Failed to save settings: ${data.error}`);
+		        }
+		    })
+		    .catch(error => {
+		        console.error("Error saving settings:", error);
+		        alert("An unexpected error occurred.");
+		    });
+	}
+
+
+
+
+
+/**
+ * The TextScramble function emulates the iconic effect from The Matrix, where text 
+ * transitions through random characters before revealing the final message. 
+ * 
+ * The animation gradually replaces the current characters with random symbols from a 
+ * predefined set until it matches the target text. 
+ * 
+ * This dynamic effect resembles digital code decrypting in real time, creating a 
+ * visually striking "hacker-style" appearance.
+ */
+	class TextScramble {
+		constructor(el) {
+		    this.el = el
+		    
+		    // Characters for the scrambling effect
+		    this.chars = '!<>-_\\/[]{}—=+*^?#________'
+		    
+		    // Bind the update method
+		    this.update = this.update.bind(this)
+		}
+		
+		// Set the text to be displayed with a scramble effect
+		setText(newText) {
+		
+			// Get the current text
+		    const oldText = this.el.innerText
+		    
+		    // Determine the longest text length
+		    const length = Math.max(oldText.length, newText.length)
+		    
+		    // Promise for when animation completes
+		    const promise = new Promise((resolve) => this.resolve = resolve)
+		    this.queue = []
+		    for (let i = 0; i < length; i++) {
+		        const from = oldText[i] || ''								// Current character or empty
+		        const to = newText[i] || ''									// Target character or empty
+		        const start = Math.floor(Math.random() * 40)				// Random start frame
+		        const end = start + Math.floor(Math.random() * 40)			// Random end frame
+		        this.queue.push({ from, to, start, end });
+		    }
+		    
+		    // Stop any ongoing animation
+		    cancelAnimationFrame(this.frameRequest)
+		    this.frame = 0										// Reset the frame counter
+		    this.update()										// Start the update loop
+		    return promise										// Return the promise
+		}
+		
+		
+		// Update the text display
+		update() {
+		    let output = ''										// The updated text to display
+		    let complete = 0									// Count of completed characters
+		    
+		    for (let i = 0, n = this.queue.length; i < n; i++) {
+		        let { from, to, start, end, char } = this.queue[i];
+
+
+		        if (this.frame >= end) {
+		            complete++
+		            output += to								// Add the final character if animation is done
+		        } else if (this.frame >= start) {
+		            if (!char || Math.random() < 0.28) {
+		                char = this.randomChar()				// Generate a random character
+		                this.queue[i].char = char
+		            }
+		            output += `<span class="dud">${char}</span>`			// Display the scrambling character
+		        } else {
+		            output += from								// Add the original character if animation hasn't started
+		        }
+		    }
+		    
+		    // Update the element's HTML
+		    this.el.innerHTML = output
+		    
+		    
+		    if (complete === this.queue.length) {
+		        this.resolve()									// Resolve the promise if all characters are done
+		    } else {
+		        this.frameRequest = requestAnimationFrame(this.update)			// Continue the animation
+		        this.frame++
+		    }
+		}
+		
+    	// Generate a random character
+		randomChar() {
+		    return this.chars[Math.floor(Math.random() * this.chars.length)]
+		}
+	}
+
+
+
+	// Phrases
+	const phrases = [
+		'Neo,',
+		'sooner or later',
+		'you\'re going to realize',
+		'just as I did',
+		'that there\'s a difference',
+		'between knowing the path',
+		'and walking the path',
+		'The Matrix has you.',
+		'Free your mind.',
+		'There is no spoon.',
+		'What is real?',
+		'The one is not a savior, but a choice.',
+		'It’s not about understanding, it’s about believing.',
+		'Reality is just a matter of perception.',
+		'The red pill is the only way out.',
+		'You’ve been living in a dream world.'
+	]
+
+	const el = document.querySelector('.text')			// Target the element with class 'text'
+	const fx = new TextScramble(el)
+
+	let counter = 0										// Start with the first phrase
+	
+	// Function to cycle through the phrases
+	const next = () => {
+		fx.setText(phrases[counter]).then(() => {
+		
+			// Wait 3 seconds before the next phrase
+		    setTimeout(next, 3000)		
+		})
+		
+		// Loop back to the start when all phrases are done
+		counter = (counter + 1) % phrases.length
+	}
+
+	// Start the animation
+	next()
+</script>
+
+</body>
+</html>

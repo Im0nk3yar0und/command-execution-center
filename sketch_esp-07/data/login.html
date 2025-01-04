@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
+    <title>Evil Corp</title>
+    
+  <style>
+    /* Body styling */
+    body {
+        margin: 0;
+        height: 100vh;
+        background-image: url('E-Corp.jpg');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        color: white;
+        flex-direction: column;
+    }
+
+    /* Login container */
+    .login-container {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 40px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 400px;							/* Max width for large screens */
+        min-height: 400px;							/* Minimum height for larger screens */
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    /* Input fields styling */
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;								/* Make the input fields fill the container */
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;						/* Ensures padding doesn't overflow */
+    }
+
+    /* Submit button styling */
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 50%;									/* Button is now half the width */
+        margin-top: 10px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    /* Responsive Design for smaller devices */
+    @media (max-width: 768px) {
+        .login-container {
+            min-height: 100px;						/* Minimum height for screens */
+            width: 80%;								/* Use more space on tablets */
+        }
+
+        input[type="submit"] {
+            width: 60%;								/* Button will be 60% width on tablets */
+        }
+    }
+
+    /* Responsive Design for mobile devices */
+    @media (max-width: 480px) {
+        .login-container {
+            width: 95%;								/* Take most of the screen on small screens */
+            min-height: 100px;						/* Minimum height for screens */
+            padding: 20px;							/* Reduced padding for mobile */
+        }
+
+        input[type="submit"] {
+            width: 80%;								/* Button is 80% of the width on mobile */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;								/* Input fields will now be 90% width on mobile */
+            font-size: 14px;						/* Reduce font size on smaller screens */
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login Page</h2>
+        <form action="/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+</body>
+</html>

