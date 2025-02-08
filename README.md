@@ -267,4 +267,3 @@ Desktop
 
 - This project is a Proof of Concept (POC) designed for educational purposes only. 
 - The author bears no responsibility for any misuse, illegal activity, or consequences arising from this project. 
-- **Tinker responsibly!**  ⚠️
